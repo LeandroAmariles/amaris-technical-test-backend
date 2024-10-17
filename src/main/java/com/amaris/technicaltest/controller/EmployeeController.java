@@ -29,6 +29,10 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeService.getEmployeById(id), HttpStatus.OK);
     }
 
+    @GetMapping("/get-employee-annual-salary/{id}")
+    ResponseEntity<Mono<EmployeeResponse>> calculateEmployeeAnnualSalary(@PathVariable int id) {
+        return new ResponseEntity<>(employeeService.calculateSalary(id), HttpStatus.OK);
+    }
 
 
 }

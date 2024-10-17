@@ -1,16 +1,16 @@
 package com.amaris.technicaltest.model;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employee {
+
+    private Long id;
 
     private String status;
 

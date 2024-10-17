@@ -16,6 +16,8 @@ public class Data {
 
     private double employeeSalary;
 
+    private double annualSalary;
+
     private int employeeAge;
 
     private String profileImageUrl;

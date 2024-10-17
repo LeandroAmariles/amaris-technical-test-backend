@@ -9,4 +9,6 @@ public interface IEmployeeService {
     public Flux<EmployeeResponse> getAllEmployees();
 
     public Mono<EmployeeResponse> getEmployeById(Integer id);
+
+    public Mono<EmployeeResponse> calculateSalary(Integer id);
 }

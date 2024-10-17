@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.Date;
+import java.util.concurrent.TimeoutException;
 
 @ControllerAdvice
 @Slf4j
@@ -23,6 +24,19 @@ public class GlobalhandlerException  extends Exception {
                 .build();
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+
+    @ExceptionHandler(TimeoutException.class)
+    public ResponseEntity<ErrorDetails> handleTimeoutException(TimeoutException e) {
+        ErrorDetails errorDetails = ErrorDetails.builder()
+                .details(e.getLocalizedMessage())
+                .message("Time out client")
+                .timestamp(new Date())
+                .build();
+        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
 
 
 }
