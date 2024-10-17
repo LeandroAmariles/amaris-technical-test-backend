@@ -99,7 +99,8 @@ public class EmployeeClient {
         @CircuitBreaker(name = "employeeService", fallbackMethod = "fallbackGetEmployees")
         private Mono<Employee> fallbackGetEmployeeById(String id, Throwable e) {
             log.error("Fallback method triggered due to: {}", e.getMessage());
-            return Mono.just(employees.get(0));
+            return Mono.just(employees.stream().filter(
+                    employee -> employee.getId().equals(Long.valueOf(id))).findFirst().get());
         }
 
 
