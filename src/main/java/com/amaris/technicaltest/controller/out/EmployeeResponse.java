@@ -1,6 +1,6 @@
 package com.amaris.technicaltest.controller.out;
 
-<<<<<<< HEAD
+
 public  record EmployeeResponse (
 
          Long id,
@@ -24,17 +24,8 @@ public  record EmployeeResponse (
          double salary,
 
          String address
-=======
-import com.amaris.technicaltest.model.Data;
 
-public  record EmployeeResponse (
 
-        Long id,
-
-        String status,
-
-        Data data
->>>>>>> cff0e96d62514e87f4fad1dd69bb871130958161
 )
 {
 }

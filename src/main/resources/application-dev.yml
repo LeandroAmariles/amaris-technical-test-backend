@@ -5,7 +5,6 @@ com:
       employees:
         employee1:
           id: 1
-<<<<<<< HEAD
           imageUrl: "https://hub.dummyapis.com/Image?text=OR&height=120&width=120"
           firstName: "TestFirst1"
           lastName: "TestLast1"
@@ -115,45 +114,3 @@ com:
           salary: 10.0
           address: "Address10"
 
-
-
-=======
-          status: 'UP'
-          data:
-            employeeName: 'Andres'
-            employeeSalary: 12000
-            employeeAge: 24
-            profileImageUrl: 'urlTest'
-        employee2:
-          id: 2
-          status: 'UP'
-          data:
-            employeeName: 'Carlos'
-            employeeSalary: 10000
-            employeeAge: 26
-            profileImageUrl: 'urlTest'
-        employee3:
-          id: 3
-          status: 'UP'
-          data:
-            employeeName: 'Juan'
-            employeeSalary: 12000
-            employeeAge: 24
-            profileImageUrl: 'urlTest'
-        employee4:
-          id: 4
-          status: 'DOWN'
-          data:
-            employeeName: 'Pedro'
-            employeeSalary: 12000
-            employeeAge: 24
-            profileImageUrl: 'urlTest'
-        employee5:
-          id: 5
-          status: 'UP'
-          data:
-            employeeName: 'Oscar'
-            employeeSalary: 12000
-            employeeAge: 24
-            profileImageUrl: 'urlTest'
->>>>>>> cff0e96d62514e87f4fad1dd69bb871130958161

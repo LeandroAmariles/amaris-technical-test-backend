@@ -47,11 +47,7 @@ public class EmployeeService implements IEmployeeService {
     public Mono<EmployeeResponse> calculateSalary(Integer id) {
         return employeeClient.getEmployee(String.valueOf(id))
                 .map(employee -> {
-<<<<<<< HEAD
                     employee.setAnnualSalary(employee.getSalary() * 12);
-=======
-                    employee.getData().setAnnualSalary(employee.getData().getEmployeeSalary() * 12);
->>>>>>> cff0e96d62514e87f4fad1dd69bb871130958161
                     return employeeMapper.mapModelToDto(employee);
                 });
     }
