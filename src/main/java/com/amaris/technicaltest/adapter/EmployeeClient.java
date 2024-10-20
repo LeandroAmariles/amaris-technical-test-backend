@@ -32,9 +32,15 @@ import java.util.concurrent.TimeoutException;
 public class EmployeeClient {
 
         private final WebClient webClient;
+<<<<<<< HEAD
 
 
         private List<Employee> employees = new ArrayList<>();
+=======
+    private final View error;
+
+    private List<Employee> employees = new ArrayList<>();
+>>>>>>> cff0e96d62514e87f4fad1dd69bb871130958161
 
         private final ReactiveCircuitBreaker reactiveCircuitBreaker;
         
@@ -45,6 +51,7 @@ public class EmployeeClient {
         @Value("${com.technical.test.employee.client.path}")
         private String employeeClientPath;
 
+<<<<<<< HEAD
 
         @Value("${com.technical.test.employee.client.query.param1}")
         private String employeeQueryParam1;
@@ -54,11 +61,17 @@ public class EmployeeClient {
 
 
 
+=======
+>>>>>>> cff0e96d62514e87f4fad1dd69bb871130958161
      @Autowired
      public EmployeeClient(WebClient webClient, List<Employee> employeeList, ReactiveCircuitBreakerFactory<?,?> reactiveCircuitBreaker, View error) {
          this.webClient = webClient;
          this.employees = employeeList;
          this.reactiveCircuitBreaker = reactiveCircuitBreaker.create("employeeService");
+<<<<<<< HEAD
+=======
+         this.error = error;
+>>>>>>> cff0e96d62514e87f4fad1dd69bb871130958161
      }
 
 
@@ -69,6 +82,7 @@ public class EmployeeClient {
                 .headers(httpHeaders -> httpHeaders.setContentType(MediaType.APPLICATION_JSON))
                 .retrieve().bodyToFlux(Employee.class)
                 .doOnNext(response -> log.info("Response from client {}", response))
+<<<<<<< HEAD
                 .timeout(Duration.ofMillis(5000))
                         .onErrorResume(error -> {
                             log.error("Error during WebClient call: ", error);
@@ -115,6 +129,36 @@ public class EmployeeClient {
                 throwable -> fallbackGetEmployeeById(id, throwable).timeout(Duration.ofMillis(10000))
         );
     }
+=======
+                .timeout(Duration.ofMillis(60000))
+                .onErrorResume(error -> {
+                    if (error instanceof TimeoutException) {
+                throw new ClientException("Time Out");
+                    } else if (error instanceof WebClientResponseException) {
+                throw new ClientException("Client responses with error");
+                    }
+            return Mono.error(error);
+                }), this::fallbackGetEmployees);
+    }
+
+        public Mono<Employee> getEmployee(String id) {
+                UriBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(employeeClientUrl)
+                        .path(employeeClientPath.concat("/".concat(id)));
+                return reactiveCircuitBreaker.run(webClient.get().uri(uriBuilder.toUriString())
+                        .headers(httpHeaders -> httpHeaders.setContentType(MediaType.APPLICATION_JSON))
+                        .retrieve().bodyToMono(Employee.class)
+                        .doOnNext(response -> log.info("Response from client {}", response))
+                        .timeout(Duration.ofMillis(60000))
+                        .onErrorResume(error -> {
+                                if (error instanceof TimeoutException) {
+                                        throw new ClientException("Time Out");
+                                } else if (error instanceof WebClientResponseException) {
+                                        throw new ClientException("Client responses with error");
+                                }
+                                return Mono.error(error);
+                        }), throwable -> fallbackGetEmployeeById(id, throwable));
+        }
+>>>>>>> cff0e96d62514e87f4fad1dd69bb871130958161
 
         @CircuitBreaker(name = "employeeService")
         private Flux<Employee> fallbackGetEmployees(Throwable e) {
@@ -125,7 +169,12 @@ public class EmployeeClient {
         @CircuitBreaker(name = "employeeService", fallbackMethod = "fallbackGetEmployees")
         private Mono<Employee> fallbackGetEmployeeById(String id, Throwable e) {
             log.error("Fallback method triggered due to: {}", e.getMessage());
+<<<<<<< HEAD
             return Mono.just(employees.get(0));
+=======
+            return Mono.just(employees.stream().filter(
+                    employee -> employee.getId().equals(Long.valueOf(id))).findFirst().get());
+>>>>>>> cff0e96d62514e87f4fad1dd69bb871130958161
         }
 
 

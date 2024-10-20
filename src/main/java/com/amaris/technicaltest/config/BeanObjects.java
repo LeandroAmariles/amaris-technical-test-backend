@@ -37,6 +37,7 @@ public class BeanObjects {
     public Employee employee5(){return new Employee();}
 
     @Bean
+<<<<<<< HEAD
     @ConfigurationProperties(prefix = "com.technical.test.employees.employee6")
     public Employee employee6(){return new Employee();}
 
@@ -60,6 +61,8 @@ public class BeanObjects {
 
 
     @Bean
+=======
+>>>>>>> cff0e96d62514e87f4fad1dd69bb871130958161
     public List<Employee> getEmployees(Map<String, Employee> employeeMap) {
         employeeMap.forEach((key, value) -> employees.add(value));
         return employees;

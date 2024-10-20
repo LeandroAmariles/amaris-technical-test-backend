@@ -6,13 +6,17 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
+<<<<<<< HEAD
 @Builder
+=======
+>>>>>>> cff0e96d62514e87f4fad1dd69bb871130958161
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employee {
 
     private Long id;
 
+<<<<<<< HEAD
     private String imageUrl;
 
     private String firstName;
@@ -32,4 +36,9 @@ public class Employee {
     private double annualSalary;
 
     private String address;
+=======
+    private String status;
+
+    private Data data;
+>>>>>>> cff0e96d62514e87f4fad1dd69bb871130958161
 }
